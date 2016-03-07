@@ -68,7 +68,9 @@ static int __init print_processes_backwards(void)
         task_name = STACK_ENTRY_DATA(task_entry, char*);
         delete_stack_entry(task_entry);
         
-        printk(KERN_ALERT "task name = %s\n", task_name);
+        if (result != -ENOMEM) {
+            printk(KERN_ALERT "task name = %s\n", task_name);
+        }
         kfree(task_name);
     }
 
